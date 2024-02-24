@@ -23,7 +23,6 @@ app.listen(3000, ()=>{
 })
 
 
-//Middleware
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 
