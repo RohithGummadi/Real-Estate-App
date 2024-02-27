@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required:true
-    }
+    },
+    avatar:{
+        type: String,
+        default: "https://res.cloudinary.com/dyx9awfbx/image/upload/v1709054796/anspzuww0dbq5jada9v9.jpg"
+    },
+    
 }, {timestamps : true});
 
 const User = mongoose.model("User", userSchema);
