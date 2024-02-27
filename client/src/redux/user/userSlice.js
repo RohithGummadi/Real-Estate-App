@@ -9,23 +9,23 @@ const initialState={
 };
 
 const userSlice = createSlice({
-    name:"user",
+    name: 'user',
     initialState,
-    reducers:{
-        signInStart: (state) =>{  //these functions are called reducers
-            state.loading = true;
-        },
-        signInSuccess:(state, action)=>{
-            state.currentUser = action.payload;
-            state.loading = false;
-            state.error = null
-        },
-        signInFailure:(state,action)=>{
-            state.error = action.payload;
-            state.loading = false;
-        }
+    reducers: {
+      signInStart: (state) => {
+        state.loading = true;
+      },
+      signInSuccess: (state, action) => {
+        state.currentUser = action.payload;
+        state.loading = false;
+        state.error = null;
+      },
+      signInFailure: (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      },
     }
-});
+})
 
 export const {signInFailure, signInStart, signInSuccess}  = userSlice.actions;
 export default userSlice.reducer;
