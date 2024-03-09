@@ -211,13 +211,15 @@ export default function Profile() {
                 <img className ="h-16 w-16 object-contain" src={listing.imageUrls[0]} alt={`Listing ${listing._id}`} />
               )}
             </Link>
-            <Link  className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing${listing._id}`}>
+            <Link  className='flex-1 text-slate-700 font-semibold hover:underline truncate' to={`/listing/${listing._id}`}>
               <p>{listing.name}</p>
             </Link>
 
             <div className='flex flex-col item-center'>
               <button onClick ={()=>handleDeleteListing(listing._id)} className="text-red-700">Delete</button>
-              <button className="text-green-700">Edit</button>
+              <Link to={`/update-listing/${listing._id}`}>
+                <button className="text-green-700">Edit</button>
+              </Link>
             </div>
 
           </div>
