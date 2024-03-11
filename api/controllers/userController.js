@@ -68,3 +68,20 @@ export const getUserListing = async(req,res, next)=>{
     }
 
 }
+
+export const getUser =async(req,res,next)=>{
+    const user = await User.findById(req.params.id);
+    try{
+        if(!user){
+            return next(errorHandler(404, "User Not Found"));
+        }
+        const {password:pass, ...rest} = user._doc
+
+        res.status(200).json(rest);
+        console.log(user._id);
+        console.log(user._doc)
+    }catch(error){
+        next(error);
+    }
+
+}
