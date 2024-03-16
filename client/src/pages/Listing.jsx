@@ -73,7 +73,7 @@ export default function Listing(){
                     {listing.type==="rent" && ' / month'}
                     </p>
                     <p className="flex items-center mt-6 gap-2 text-slate-600 my-2 text-sm">
-                        <FaMapMarkerAlt class="text-green-700"/>
+                        <FaMapMarkerAlt className="text-green-700"/>
                         {listing.address}
                     </p>
                     <div className="flex gap-4">
