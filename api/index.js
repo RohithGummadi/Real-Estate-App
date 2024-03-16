@@ -6,29 +6,37 @@ import authRouter from "./routes/authRoute.js";
 import { err } from "./middlewares/authMiddleware.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listingRoute.js";
-dotenv.config()
+import path from "path";
+import { fileURLToPath } from 'url'; // Import fileURLToPath from url module
+dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url); // Getting current filename
+const __dirname = path.dirname(__filename); // Getting current directory name
 
 mongoose.connect(process.env.MONGODB_URL)
-.then(()=>{
+  .then(() => {
     console.log("Connected to MongoDB")
-    })
-.catch((err)=>{
+  })
+  .catch((err) => {
     console.log(err)
-})
+  });
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, ()=>{
-    console.log("Server is running in port 3000")
-})
-
+app.listen(3000, () => {
+  console.log("Server is running in port 3000");
+});
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/listing", listingRouter)
+app.use("/api/listing", listingRouter);
 
-//Middleware
-app.use(err)
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
+// Middleware
+app.use(err);
