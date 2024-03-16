@@ -1,4 +1,3 @@
-import React from 'react';
 import Listing from '../models/listingModel.js';
 import { errorHandler } from '../utils/error.js';
 
