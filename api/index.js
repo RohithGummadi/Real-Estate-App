@@ -7,11 +7,7 @@ import { err } from "./middlewares/authMiddleware.js";
 import cookieParser from "cookie-parser";
 import listingRouter from "./routes/listingRoute.js";
 import path from "path";
-import { fileURLToPath } from 'url'; // Import fileURLToPath from url module
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url); // Getting current filename
-const __dirname = path.dirname(__filename); // Getting current directory name
 
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
@@ -20,6 +16,8 @@ mongoose.connect(process.env.MONGODB_URL)
   .catch((err) => {
     console.log(err)
   });
+
+const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -34,9 +32,10 @@ app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 // Middleware
 app.use(err);
